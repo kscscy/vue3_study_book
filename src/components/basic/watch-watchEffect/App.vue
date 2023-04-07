@@ -1,7 +1,13 @@
 <template>
   <p>{{ count_o }}</p>
   <button @click="count_o++">Options API 카운트 증가</button>
-  <p></p>
+  <p>{{ count_c_1 }}</p>
+  <button @click="count_c_1++">Composition API 1st 카운트 증가</button>
+  <p>{{ count_c_2 }}</p>
+  <button @click="count_c_2++">Composition API 2nd 카운트 증가</button>
+  <p>상태: {{ state }}</p>
+  <button @click="onStop()">watchEffect 중지</button>
+
 </template>
 
 <script>
@@ -44,16 +50,27 @@ export default {
      * 이는 flush: 'sync'를 사용하여 수행할 수 있습니다.
      * 그러나 이 설정은 여러 프로퍼티가 동시에 업데이트되는 경우 성능 및 데이터 일관성 문제를 일으킬 수 있으므로 주의해서 사용해야 합니다.
      * 
+     * 기본적으로 flush: 'pre'|'post' 옵션은 콜백을 버퍼링하여, 동일한 "틱(tick)"에서 여러 번 상태 변경이 되더라도, 마지막에 한 번만 호출됩니다.
      * 동일한 틱 내에 여러 번 상태 변경 시 마다 동기적으로 콜백을 호출해야 하는 경우, flush: 'sync' 옵션을 사용해야 합니다.
      * 단, 일반적으로 이러한 동작은 비효율적이므로 사용하려는 경우, 정말 필요한지 다시 한번 고민해봐야 합니다.
      */
+
     const stop = watchEffect(() => {
       console.log(`Composition API watchEffect called ${count_c_2.value}`);
     }, {
       flush: 'post'
     });
+    const onStop = () => {
+      state.value = '중지됨'
+      stop();
+    }
 
-
+    return {
+      count_c_1,
+      count_c_2,
+      state,
+      onStop
+    }
   }
 }
 </script>
