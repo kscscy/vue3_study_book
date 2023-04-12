@@ -34,34 +34,28 @@
 
   </section>
 </template>
-<script>
+<script setup>
 import { reactive, toRefs, inject } from 'vue';
 
-export default {
-  name: 'TodoListNew',
-  setup() {
-    const today = inject('today');
-    const addTodo = inject('addTodo');
-    const val_obj = reactive({
-      job: '',
-      date: today,
-      today: today
-    });
+const today = inject('today');
+const addTodo = inject('addTodo');
+const val_obj = reactive({
+  job: '',
+  date: today,
+  today: today
+});
 
-    const onAddTodo = () => {
-      if (val_obj.job.length > 0) {
-        addTodo(val_obj.job, val_obj.date);
-        val_obj.job = '';
-        val_obj.date = today;
-      }
-    }
-
-    return {
-      ...toRefs(val_obj),
-      onAddTodo
-    }
+const onAddTodo = () => {
+  if (val_obj.job.length > 0) {
+    addTodo(val_obj.job, val_obj.date);
+    val_obj.job = '';
+    val_obj.date = today;
   }
 }
+// Property "job" was accessed during render but is not defined on instance. 
+// 속성을 template에서 접근하고 싶으면 최상위로 꺼내야함
+const { job, date } = toRefs(val_obj);
+
 </script>
 <style>
 

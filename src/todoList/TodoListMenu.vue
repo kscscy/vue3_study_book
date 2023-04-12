@@ -25,32 +25,29 @@
   </div>
 </template>
 <script>
+export default {
+  name: 'TodoListMenu'
+}
+</script>
+<script setup>
 import { inject, watch, ref, computed } from 'vue';
 
-export default {
-  name: 'TodoListMenu',
-  emits: ['change-filter'],
-  setup(props, context) {
-    const filters = inject('filters');
-    const filter = ref(0);
-    const state = computed(() => {
-      return filters[filter.value].str;
-    });
+// defineEmits은 import 불필요
+const emit = defineEmits(['change-filter']);
+const filters = inject('filters');
+const filter = ref(0);
 
-    watch(
-      () => filter.value,
-      (filter) => {
-        context.emit('change-filter', filter);
-      }
-    );
+const state = computed(() => {
+  return filters[filter.value].str;
+});
 
-    return {
-      state,
-      filter,
-      filters
-    }
+watch(
+  () => filter.value,
+  (filter) => {
+    emit('change-filter', filter);
   }
-}
+);
+
 </script>
 <style>
 
