@@ -19,7 +19,7 @@ export default {
 </script>
 <script setup>
 import { inject, provide, ref, watch } from 'vue';
-import { useFilter } from './compositions/filters'
+import { useFilter } from '../compositions/filters.js'
 import TodoList from './TodoList.vue';
 import TodoListMenu from './TodoListMenu.vue';
 

@@ -14,7 +14,7 @@ export default {
 </script>
 <script setup>
 import { inject } from 'vue';
-import TodoListContainer from './TodoListContainer.vue';
+import TodoListContainer from './components/TodoListContainer.vue';
 
 const today = inject('today');
 </script>

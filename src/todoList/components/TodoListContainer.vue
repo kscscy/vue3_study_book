@@ -13,7 +13,7 @@ export default {
 </script>
 <script setup>
 import { provide, ref, readonly } from 'vue';
-import { useStorage } from './compositions/storage';
+import { useStorage } from '../compositions/storage.js';
 import TodoListNew from './TodoListNew.vue';
 import TodoListMain from './TodoListMain.vue';
 
