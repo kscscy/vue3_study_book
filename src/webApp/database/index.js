@@ -39,7 +39,7 @@ let db = new sqlite3.Database('database.db', (err) => {
         ];
         resume.forEach((item) => {
           const query = `INSERT OR IGNORE INTO tbl_my_resume (date, title, content, URL)
-          VALUES ('${item.date}', '${item.title}', '${item.content}', '${item.URL}')`;
+          VALUES ('${item.date}', '${item.title}', '${item.content}', '${item.url}')`;
           db.run(query);
         });
       }
@@ -63,7 +63,7 @@ app.get('/db/about-me', (req, res, next) => {
   db.get('SELECT * FROM tbl_about_myself', (err, row) => {
     if (!err) {
       result.data = row;
-      db.all('SELECT * FROM tbl_my_resume ORDER BY date desc', (err, rows) => {
+      db.all('SELECT * FROM tbl_my_resume ORDER BY date desc', (err2, rows) => {
         if (!err2) {
           result.rsp = 'ok';
           result.data.resume = rows;

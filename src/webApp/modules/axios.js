@@ -1,5 +1,5 @@
-import { axios } from 'axios';
-
+// import { axios } from 'axios';
+import axios from 'axios';
 export default () => {
   const BASE_URL = 'http://localhost:3031';
   const axiosGet = (URL = '', onSuccess = null, onFailed = null) => {
